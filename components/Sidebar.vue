@@ -1,5 +1,10 @@
 <template>
-  <aside :class="[true ? 'max-w-lg' : 'max-w-0', 'w-40']">
+  <aside
+    :class="[
+      true ? 'max-w-lg' : 'max-w-0',
+      'w-40 h-screen bg-white rounded-r-3xl shadow-xl',
+    ]"
+  >
     <ul>
       <li
         :class="[
