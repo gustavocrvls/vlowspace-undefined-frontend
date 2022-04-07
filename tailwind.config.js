@@ -10,6 +10,7 @@ module.exports = {
         gray: colors.gray,
         card: '#ffffff',
         bord: '#f3f4f6',
+        backg: '#f7f8ff',
       },
     },
   },

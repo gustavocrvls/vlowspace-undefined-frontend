@@ -1,3 +1,3 @@
 <template>
-  <h1>Férias</h1>
+  <h1>Worskpace</h1>
 </template>
