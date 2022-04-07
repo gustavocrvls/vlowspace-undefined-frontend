@@ -1,7 +1,19 @@
 <template>
-  <aside :class="[true ? 'w-40 max-w-lg' : 'w-40 max-w-0']">
+  <aside :class="[true ? 'max-w-lg' : 'max-w-0', 'w-40']">
     <ul>
-      <li @click="goToVacation">Férias</li>
+      <li
+        :class="[
+          'cursor-pointer',
+          'rounded-r-full',
+          'p-3',
+          isActive('/vacations')
+            ? 'text-white bg-blue-500 hover:bg-blue-600'
+            : '',
+        ]"
+        @click="goToVacation"
+      >
+        Férias
+      </li>
     </ul>
   </aside>
 </template>
@@ -13,6 +25,9 @@ export default {
       this.$router.push({
         path: '/vacations',
       })
+    },
+    isActive(route) {
+      return this.$nuxt.$route.path === route
     },
   },
 }
