@@ -4,8 +4,8 @@
 
     <div class="max-w-screen-xl mx-auto">
       <div class="flex">
-        <WorkspaceButtons class="w-2/12" />
-        <div class="w-10/12">
+        <WorkspaceSidebar class="w-2/12 mt-5" />
+        <div class="w-10/12 ml-5">
           <Nuxt />
         </div>
       </div>
