@@ -9,21 +9,15 @@
       <div class="p-4 m-3 mt-0 bg-card shadow-2xl rounded-lg w-full">
         <div class="border-b">
           <div
-            class="flex flex-row mt-4 ml-20 p-3 border-bord font-bold text-xs"
+            class="flex flex-row mt-4 ml-16 p-3 border-bord font-bold text-xs"
           >
             <div class="w-1/4">INÍCIO</div>
-            <div class="w-1/2">FIM</div>
-            <div class="w-1/2 items-end">STATUS</div>
+            <div class="w-1/2">TÉRMINO</div>
+            <div class="w-1/2">STATUS</div>
           </div>
         </div>
-        <div class="border-b">
-          <h1>Hello World</h1>
-          <h1>Hello World</h1>
-          <h1>Hello World</h1>
-          <h1>Hello World</h1>
-          <h1>Hello World</h1>
-          <h1>Hello World</h1>
-        </div>
+        <DaysOffFormat />
+        <div class="border-b"></div>
       </div>
     </div>
   </main>
