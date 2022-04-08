@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col text-center h-full tracking-wide shadow-lg p-3">
+  <div class="flex flex-col text-center h-full tracking-wide">
     <button
       :class="[
         'hover:shadow-md',
