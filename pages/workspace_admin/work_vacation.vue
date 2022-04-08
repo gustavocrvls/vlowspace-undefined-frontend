@@ -11,13 +11,13 @@
           <div
             class="flex flex-row mt-4 ml-16 p-3 border-bord font-bold text-xs"
           >
-            <div class="w-1/3">INÍCIO</div>
-            <div class="w-1/2">TÉRMINO</div>
-            <div class="w-1/3 mr-3">PERÍODO</div>
+            <div class="w-1/4 mr-2">INÍCIO</div>
+            <div class="w-1/3 mr-5">TÉRMINO</div>
+            <div class="w-1/3">PERÍODO</div>
             <div class="w-1/2 text-center">STATUS</div>
           </div>
         </div>
-        <DaysOffEmployeeButtons />
+        <DaysOffAdminButtons />
         <div class="border-b"></div>
       </div>
     </div>

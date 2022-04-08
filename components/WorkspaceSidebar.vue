@@ -41,7 +41,10 @@ export default {
   },
   methods: {
     isActive(route) {
-      return this.$nuxt.$route.path.includes(`workspace/${route}`)
+      return (
+        this.$nuxt.$route.path.includes(`workspace/${route}`) ||
+        this.$nuxt.$route.path.includes(`workspace_admin/${route}`)
+      )
     },
     goTo(path) {
       this.$router.push({
