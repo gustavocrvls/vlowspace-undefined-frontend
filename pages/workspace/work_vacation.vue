@@ -4,7 +4,10 @@
       <WorkspaceTitle
         class="m-3"
         title="Solicitações de Férias"
-        :button="{ title: 'Nova Solicitação' }"
+        :button="{
+          title: 'Nova Solicitação',
+          onClick: toggleIsNewVacationOpen,
+        }"
       />
     </div>
     <div class="flex h-3/6 max-w-screen-2xl">
@@ -23,11 +26,26 @@
         </div>
       </div>
     </div>
+
+    <Modal v-if="isNewVacationOpen" :close="toggleIsNewVacationOpen">
+      form
+    </Modal>
   </main>
 </template>
 
 <script>
 export default {
   layout: 'workspace',
+  data() {
+    return {
+      isNewVacationOpen: false,
+    }
+  },
+  methods: {
+    toggleIsNewVacationOpen() {
+      console.log(this.isNewVacationOpen)
+      this.isNewVacationOpen = !this.isNewVacationOpen
+    },
+  },
 }
 </script>
