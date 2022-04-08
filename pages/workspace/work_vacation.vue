@@ -5,7 +5,7 @@
         <h1>Solicitações de Férias</h1>
       </div>
     </div>
-    <div class="flex h-3/6 max-w-screen-2xl">
+    <div class="flex max-w-screen-2xl">
       <div class="p-4 m-3 mt-0 bg-card shadow-2xl rounded-lg w-full">
         <div class="border-b">
           <div
@@ -17,6 +17,11 @@
           </div>
         </div>
         <div class="border-b">
+          <h1>Hello World</h1>
+          <h1>Hello World</h1>
+          <h1>Hello World</h1>
+          <h1>Hello World</h1>
+          <h1>Hello World</h1>
           <h1>Hello World</h1>
         </div>
       </div>

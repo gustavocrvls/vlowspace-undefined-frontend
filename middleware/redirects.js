@@ -4,6 +4,10 @@ export default function (req, res, next) {
       from: '/',
       to: '/workspace/work_vacation',
     },
+    {
+      from: '/workspace',
+      to: '/workspace/work_vacation',
+    },
   ]
   const redirect = redirects.find((r) => r.from === req.url)
   if (redirect) {
