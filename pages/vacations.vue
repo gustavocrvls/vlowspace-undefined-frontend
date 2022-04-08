@@ -1,3 +1,0 @@
-<template>
-  <h1>Férias</h1>
-</template>
