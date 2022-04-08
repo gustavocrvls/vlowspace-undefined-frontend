@@ -11,6 +11,7 @@ module.exports = {
         card: '#ffffff',
         bord: '#f3f4f6',
         backg: '#f7f8ff',
+        white: colors.white,
       },
     },
   },
