@@ -1,9 +1,14 @@
 <template>
   <main class="w-full m-5">
     <div class="flex flex-row mt-1">
-      <div class="p-4 m-3 ml-4 mb-0 mt-2 font-bold tracking-wide text-3xl">
-        <h1>Solicitações de Férias</h1>
-      </div>
+      <WorkspaceTitle
+        class="m-3"
+        title="Solicitações de Férias"
+        :button="{
+          title: 'Nova Solicitação',
+          onClick: toggleIsNewVacationOpen,
+        }"
+      />
     </div>
     <div class="flex max-w-screen-2xl">
       <div class="p-4 m-3 mt-0 bg-card shadow-2xl rounded-lg w-full">
@@ -21,11 +26,25 @@
         <div class="border-b"></div>
       </div>
     </div>
+
+    <Modal v-if="isNewVacationOpen" :close="toggleIsNewVacationOpen">
+      form
+    </Modal>
   </main>
 </template>
 
 <script>
 export default {
   layout: 'workspace',
+  data() {
+    return {
+      isNewVacationOpen: false,
+    }
+  },
+  methods: {
+    toggleIsNewVacationOpen() {
+      this.isNewVacationOpen = !this.isNewVacationOpen
+    },
+  },
 }
 </script>

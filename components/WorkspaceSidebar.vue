@@ -5,13 +5,14 @@
       :key="route.path"
       :class="[
         'hover:shadow-md',
+        'font-bold',
         'mb-4',
         'p-3',
-        'rounded-lg',
+        'rounded',
         'shadow-lg',
         'transition-shadow',
         isActive(route.path)
-          ? 'text-white bg-blue-500 shadow-xl'
+          ? 'text-white bg-blue-500 shadow-xl hover:bg-blue-700'
           : 'text-black bg-backg',
       ]"
       @click="goTo(route.path)"
