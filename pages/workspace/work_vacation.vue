@@ -27,8 +27,12 @@
       </div>
     </div>
 
-    <Modal v-if="isNewVacationOpen" :close="toggleIsNewVacationOpen">
-      form
+    <Modal
+      v-if="isNewVacationOpen"
+      title="Nova Solicitação"
+      :close="toggleIsNewVacationOpen"
+    >
+      <NewVacationForm />
     </Modal>
   </main>
 </template>

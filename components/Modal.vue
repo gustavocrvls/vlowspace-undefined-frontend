@@ -20,7 +20,7 @@
       >
 
       <div
-        class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
+        class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full"
       >
         <div class="bg-white px-2 pt-5 pb-4 sm:p-2 sm:pb-4">
           <div class="mt-3 text-center sm:ml-4 sm:text-left">
