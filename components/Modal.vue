@@ -32,7 +32,7 @@
                 class="w-8 h-8 rounded-lg hover:bg-gray-100"
                 @click="close"
               >
-                <font-awesome-icon :icon="['fas', 'times']" />
+                <fa :icon="['fas', 'times']" />
               </button>
             </div>
             <div class="mt-2">

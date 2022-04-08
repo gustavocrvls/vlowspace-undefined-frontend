@@ -59,6 +59,7 @@ export default {
   serverMiddleware: ['~/middleware/redirects.js'],
 
   fontawesome: {
+    component: 'fa',
     icons: {
       solid: true,
       brands: true,
