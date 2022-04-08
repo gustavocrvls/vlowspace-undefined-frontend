@@ -16,6 +16,7 @@ module.exports = {
         reproved: '#E37B7B',
         pending: '#A6A6A6',
         input: '#F2F2F2',
+        disabled: '#D4DEEC',
       },
     },
   },

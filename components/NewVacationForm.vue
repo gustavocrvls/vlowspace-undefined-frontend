@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex flex-col">
     <div class="grid grid-cols-2 gap-8">
       <Input
         id="init_date"
@@ -15,6 +15,18 @@
       />
     </div>
 
-    <div class="row"></div>
+    <div class="w-100 pt-5 text-right">
+      <Button :click="log"> Salvar </Button>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    log() {
+      console.log('test')
+    },
+  },
+}
+</script>
