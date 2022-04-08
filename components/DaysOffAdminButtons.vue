@@ -19,16 +19,16 @@
           'mr-16',
           'ml-24',
           'h-8',
+          'cursor-default',
           background(stats),
         ]"
-        :disabled="!canEdit()"
-        @click="goToModal()"
       >
         {{ stats }}
       </button>
       <div v-if="stats === 'A Validar'">
         <button
           class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+          @click="toggleIsNewValidationOpen"
         >
           <fa :icon="['fas', 'check']" />
         </button>
@@ -41,9 +41,14 @@
         </button>
       </div>
       <div v-else>
-        <button class="h-8 bg-backg w-8 mr-12 shadow-inner"></button>
+        <button
+          class="h-8 bg-backg w-8 mr-12 shadow-inner cursor-not-allowed"
+        ></button>
       </div>
     </div>
+    <Modal v-if="isNewValidationOpen" :close="toggleIsNewValidationOpen">
+      form
+    </Modal>
   </div>
 </template>
 
@@ -51,6 +56,7 @@
 export default {
   data() {
     return {
+      isNewValidationOpen: false,
       firstDate: 'DD/MM/AA',
       lastDate: 'DD/MM/AA',
       quantity: 'XX dias',
@@ -72,8 +78,8 @@ export default {
     canEdit() {
       return this.$nuxt.$route.path === '/workspace_admin/work_vacation'
     },
-    goToModal() {
-      /* console.log('Hello') */
+    toggleIsNewValidationOpen() {
+      this.isNewValidationOpen = !this.isNewValidationOpen
     },
   },
 }
