@@ -22,7 +22,7 @@
             <div class="w-1/2 text-center">STATUS</div>
           </div>
         </div>
-        <DaysOffFormat />
+        <DaysOffEmployeeButtons />
         <div class="border-b"></div>
       </div>
     </div>
