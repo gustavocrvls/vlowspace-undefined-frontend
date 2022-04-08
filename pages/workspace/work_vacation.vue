@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     toggleIsNewVacationOpen() {
-      console.log(this.isNewVacationOpen)
       this.isNewVacationOpen = !this.isNewVacationOpen
     },
   },
