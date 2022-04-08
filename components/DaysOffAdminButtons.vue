@@ -26,9 +26,23 @@
       >
         {{ stats }}
       </button>
-      <button class="bg-red-300 w-20 mr-12">
-        <fa :icon="['fas', 'check']" />
-      </button>
+      <div v-if="stats === 'A Validar'">
+        <button
+          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+        >
+          <fa :icon="['fas', 'check']" />
+        </button>
+      </div>
+      <div v-else-if="stats === 'Aprovado' || stats === 'Rejeitado'">
+        <button
+          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+        >
+          <fa :icon="['fas', 'pen-to-square']" />
+        </button>
+      </div>
+      <div v-else>
+        <button class="h-8 bg-backg w-8 mr-12 shadow-inner"></button>
+      </div>
     </div>
   </div>
 </template>
