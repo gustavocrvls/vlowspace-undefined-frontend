@@ -5,7 +5,7 @@
         <div
           class="flex justify-center text-blue-500 text-2xl text-center py-5 font-bold"
         >
-          <img src="~/static/logo.png" alt="" width="120" />
+          <img src="~/static/logo.png" alt="" width="200" />
         </div>
         <div class="flex flex-1 flex-col mb-3">
           <label class="font-bold" for="email">E-mail</label>

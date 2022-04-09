@@ -1,44 +1,47 @@
 <template>
-  <div class="flex flex-col mt-4 ml-14 pb-3">
+  <div class="flex flex-col mt-4 ml-10 pb-3">
     <div
       v-for="(vacation, index) in vacations"
       :key="vacation.id"
-      class="flex flex-row mb-3 text-gray-400"
+      class="flex flex-row mb-3 text-gray-600"
     >
-      <p class="w-1/3 mr-5">
+      <p class="w-2/12">
         {{ format(new Date(vacation.dateStart), 'dd/MM/yyyy') }}
       </p>
-      <p class="w-1/2 mr-2 ml-1">
+      <p class="w-2/12">
         {{ format(new Date(vacation.dateEnd), 'dd/MM/yyyy') }}
       </p>
-      <p class="w-1/3 ml-2">{{ `${getQuantity(vacation)} dias` }}</p>
+      <p class="w-3/12">{{ `${getQuantity(vacation)} dias` }}</p>
+      <p class="w-3/12 text-center">
+        <Badge class="w-48" :content="vacation.status" />
+      </p>
 
-      <Badge class="w-72 mr-8 ml-32" :content="vacation.status" />
-
-      <div v-if="vacation.status === 'Pendente'">
-        <button
-          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
-          @click="openValidation(index)"
+      <div class="w-2/12">
+        <div v-if="vacation.status === 'Pendente'">
+          <button
+            class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
+            @click="openValidation(index)"
+          >
+            <fa :icon="['fas', 'check']" />
+          </button>
+        </div>
+        <div
+          v-else-if="
+            vacation.status === 'Aprovado' || vacation.status === 'Rejeitado'
+          "
         >
-          <fa :icon="['fas', 'check']" />
-        </button>
-      </div>
-      <div
-        v-else-if="
-          vacation.status === 'Aprovado' || vacation.status === 'Rejeitado'
-        "
-      >
-        <button
-          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
-          @click="openEdition(index)"
-        >
-          <fa :icon="['fas', 'pen-to-square']" />
-        </button>
-      </div>
-      <div v-else>
-        <button
-          class="h-8 bg-backg w-8 mr-8 shadow-inner cursor-not-allowed"
-        ></button>
+          <button
+            class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
+            @click="openEdition(index)"
+          >
+            <fa :icon="['fas', 'pen-to-square']" />
+          </button>
+        </div>
+        <div v-else>
+          <button
+            class="h-8 bg-backg w-8 mr-8 shadow-inner cursor-not-allowed"
+          ></button>
+        </div>
       </div>
     </div>
     <!-- Validation Modal -->
