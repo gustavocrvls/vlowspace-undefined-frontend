@@ -32,7 +32,7 @@
       title="Nova Solicitação"
       :close="toggleIsNewVacationOpen"
     >
-      <NewVacationForm />
+      <NewVacationForm :save="toggleIsNewVacationOpen" />
     </Modal>
   </main>
 </template>
@@ -44,6 +44,9 @@ export default {
     return {
       isNewVacationOpen: false,
     }
+  },
+  mounted() {
+    this.$store.dispatch('vacations/fetchVacations')
   },
   methods: {
     toggleIsNewVacationOpen() {
