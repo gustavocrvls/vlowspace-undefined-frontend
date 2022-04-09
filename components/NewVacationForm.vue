@@ -52,9 +52,10 @@ export default {
   },
   methods: {
     addVacation() {
-      this.$store.commit('vacations/add', {
+      this.$store.dispatch('vacations/saveVacation', {
         dateStart: this.dateStart,
         dateEnd: this.dateEnd,
+        status: 'Pendente',
       })
       this.save()
     },

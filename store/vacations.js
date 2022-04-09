@@ -16,7 +16,7 @@ export const actions = {
   },
   async saveVacation({ commit }, vacation) {
     try {
-      await this.$axios.get('/vacation')
+      await this.$axios.post('/createVacation', vacation)
       commit('add', vacation)
     } catch (error) {
       alert(error)
