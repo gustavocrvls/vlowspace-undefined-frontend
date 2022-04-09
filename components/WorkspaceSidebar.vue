@@ -15,6 +15,7 @@
           ? 'text-white bg-blue-500 shadow-xl hover:bg-blue-700'
           : 'text-black bg-backg',
       ]"
+      :disabled="!route.isActive"
       @click="goTo(route.path)"
     >
       {{ route.name }}
@@ -33,9 +34,9 @@ export default {
           isActive: true,
         },
         {
-          name: 'Holerites',
+          name: 'Holerites (em breve)',
           path: 'work_holerites',
-          isActive: true,
+          isActive: false,
         },
       ],
     }
@@ -50,16 +51,6 @@ export default {
     goTo(path) {
       this.$router.push({
         path: `${path}`,
-      })
-    },
-    goToVacationDash() {
-      this.$router.push({
-        path: '/workspace/work_vacation',
-      })
-    },
-    goToHoleriteDash() {
-      this.$router.push({
-        path: '/workspace/work_holerites',
       })
     },
   },

@@ -1,43 +1,65 @@
 <template>
   <div class="flex flex-col">
     <div class="grid grid-cols-2 gap-8">
-      <Input
-        id="init_date"
-        label="Data de Início"
-        type="date"
-        name="initial_date"
-      />
-      <Input
-        id="init_date"
-        label="Data de Término"
-        type="date"
-        name="ending_date"
-      />
+      <div class="w-1/2">
+        <div class="flex flex-1 flex-col">
+          <label class="font-bold" for="date_ending">Data de Início</label>
+          <input
+            id="date_ending"
+            v-model="dateStart"
+            type="date"
+            name="date_ending"
+            class="bg-input p-2 rounded-lg"
+          />
+        </div>
+      </div>
+      <div class="w-1/2">
+        <div class="flex flex-1 flex-col">
+          <label class="font-bold" for="date_end">Data de Término</label>
+          <input
+            id="date_end"
+            v-model="dateEnd"
+            type="date"
+            name="date_end"
+            class="bg-input p-2 rounded-lg"
+          />
+        </div>
+      </div>
     </div>
 
     <div class="w-100 pt-5 text-right">
-      <Button :click="log"> Salvar </Button>
+      <Button :click="addVacation"> Salvar </Button>
     </div>
   </div>
 </template>
 
 <script>
-// import { mapMutations } from 'vuex'
-
 export default {
+  props: {
+    save: {
+      type: Function,
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      dateStart: null,
+      dateEnd: null,
+    }
+  },
   computed: {
     vacations() {
       return this.$store.state.vacations.list
     },
   },
   methods: {
-    addTodo(e) {
-      this.$store.commit('vacations/add', e.target.value)
-      e.target.value = ''
+    addVacation() {
+      this.$store.commit('vacations/add', {
+        dateStart: this.dateStart,
+        dateEnd: this.dateEnd,
+      })
+      this.save()
     },
-    // ...mapMutations({
-    //   toggle: 'todos/toggle',
-    // }),
   },
 }
 </script>

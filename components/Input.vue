@@ -31,6 +31,10 @@ export default {
       type: String,
       default: 'name',
     },
+    model: {
+      type: String,
+      default: '',
+    },
   },
 }
 </script>

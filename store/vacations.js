@@ -1,55 +1,32 @@
+import axios from 'axios'
+
 export const state = () => ({
-  list: [
-    {
-      user: {
-        name: 'Gustavo Carvalho',
-      },
-      owner: {
-        name: 'Sim Jr.',
-      },
-      dp: {
-        name: 'Não Jr.',
-      },
-      dateStart: new Date(),
-      dateEnd: new Date(),
-      quantity: 15,
-      status: 'A Validar',
-    },
-    {
-      user: {
-        name: 'Naruto Uzumaki',
-      },
-      owner: {
-        name: 'Kakashi Hatake',
-      },
-      dp: {
-        name: 'Iruka Sensei',
-      },
-      dateStart: new Date(),
-      dateEnd: new Date(),
-      quantity: 15,
-      status: 'Aprovado',
-    },
-    {
-      user: {
-        name: 'Daniel Walter',
-      },
-      owner: {
-        name: 'Shrek da fonseca',
-      },
-      dp: {
-        name: 'Burro da silva',
-      },
-      dateStart: new Date(),
-      dateEnd: new Date(),
-      quantity: 15,
-      status: 'Reprovado',
-    },
-  ],
+  list: [],
 })
+
+// export const getters = () => ({
+//   getUsers: (state) => state.users
+// })
+
+export const actions = {
+  async fetchVacations({ commit }) {
+    try {
+      const { data } = await axios.get(
+        'https://62517af1dfa31c1fbd6e8814.mockapi.io/vacation'
+      )
+      commit('setVacations', data)
+    } catch (error) {
+      alert(error)
+      console.error(error)
+    }
+  },
+}
 
 export const mutations = {
   add(state, vacation) {
     state.list.push(vacation)
+  },
+  setVacations(state, vacations) {
+    state.list = vacations
   },
 }
