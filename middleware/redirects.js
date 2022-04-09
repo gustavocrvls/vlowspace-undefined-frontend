@@ -1,10 +1,6 @@
 export default function (req, res, next) {
   const redirects = [
     {
-      from: '/',
-      to: '/workspace/work_vacation',
-    },
-    {
       from: '/workspace',
       to: '/workspace/work_vacation',
     },

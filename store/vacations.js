@@ -1,20 +1,23 @@
-import axios from 'axios'
+// import axios from '~/plugins/axios'
 
 export const state = () => ({
   list: [],
 })
 
-// export const getters = () => ({
-//   getUsers: (state) => state.users
-// })
-
 export const actions = {
   async fetchVacations({ commit }) {
     try {
-      const { data } = await axios.get(
-        'https://62517af1dfa31c1fbd6e8814.mockapi.io/vacation'
-      )
+      const { data } = await this.$axios.get('/vacation')
       commit('setVacations', data)
+    } catch (error) {
+      alert(error)
+      console.error(error)
+    }
+  },
+  async saveVacation({ commit }, vacation) {
+    try {
+      await this.$axios.post('/createVacation', vacation)
+      commit('add', vacation)
     } catch (error) {
       alert(error)
       console.error(error)
