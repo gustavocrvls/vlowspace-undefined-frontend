@@ -2,15 +2,13 @@
   <button
     :class="[
       'text-center',
-      'w-72',
       'text-xs',
       'text-white',
       'rounded',
       'font-bold',
-      'mr-16',
-      'ml-24',
       'h-8',
       'cursor-default',
+      customStyles,
       background(content),
     ]"
   >

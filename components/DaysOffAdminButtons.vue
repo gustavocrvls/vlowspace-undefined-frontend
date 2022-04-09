@@ -13,11 +13,11 @@
       </p>
       <p class="w-1/3 ml-2">{{ `${getQuantity(vacation)} dias` }}</p>
 
-      <Badge :content="vacation.status" />
+      <Badge class="w-72 mr-8 ml-32" :content="vacation.status" />
 
       <div v-if="vacation.status === 'Pendente'">
         <button
-          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
           @click="openValidation(index)"
         >
           <fa :icon="['fas', 'check']" />
@@ -29,7 +29,7 @@
         "
       >
         <button
-          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
           @click="openEdition(index)"
         >
           <fa :icon="['fas', 'pen-to-square']" />
@@ -37,7 +37,7 @@
       </div>
       <div v-else>
         <button
-          class="h-8 bg-backg w-8 mr-12 shadow-inner cursor-not-allowed"
+          class="h-8 bg-backg w-8 mr-8 shadow-inner cursor-not-allowed"
         ></button>
       </div>
     </div>
@@ -169,7 +169,19 @@
           </div>
         </div>
         <div class="flex flex-row justify-between mr-3 mt-2">
-          <Badge class="mt-3" :content="vacations[selectedIndex].status" />
+          <div class="flex flex-col">
+            <div class="flex flex-row mt-2">
+              <button
+                class="border-2 border-blue-200 justify-around rounded w-5 h-10 mr-2"
+              >
+                <fa class="pt-1 text-blue-500" :icon="['fas', 'arrow-down']" />
+              </button>
+              <Badge
+                class="p-3 h-10 w-36"
+                :content="vacations[selectedIndex].status"
+              />
+            </div>
+          </div>
           <button class="text-white font-bold py-2 rounded">
             <div
               class="flex flex-row shadow-lg hover:shadow-md hover:bg-blue-600 hover:border-blue-600 transition-shadow bg-blue-500 border-2 border-blue-500 w-24 justify-around p-2 rounded"
