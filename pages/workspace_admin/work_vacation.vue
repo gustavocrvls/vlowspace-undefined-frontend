@@ -9,12 +9,13 @@
       <div class="p-4 m-3 mt-0 bg-card shadow-2xl rounded-lg w-full">
         <div class="border-b">
           <div
-            class="flex flex-row mt-4 ml-16 p-3 border-bord font-bold text-xs"
+            class="flex flex-row mt-4 ml-10 py-3 border-bord font-bold text-xs"
           >
-            <div class="w-1/4 mr-2">INÍCIO</div>
-            <div class="w-1/3 mr-5">TÉRMINO</div>
-            <div class="w-1/3">PERÍODO</div>
-            <div class="w-1/2 text-center">STATUS</div>
+            <div class="w-2/12">INÍCIO</div>
+            <div class="w-2/12">TÉRMINO</div>
+            <div class="w-3/12">PERÍODO</div>
+            <div class="w-3/12 text-center">STATUS</div>
+            <div class="w-2/12 text-center"></div>
           </div>
         </div>
         <DaysOffAdminButtons />

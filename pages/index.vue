@@ -1,8 +1,12 @@
 <template>
   <form method="post" @submit.prevent="login">
     <div class="flex items-center justify-center h-screen h-min-screen">
-      <div class="bg-white shadow-lg p-10 w-full h-80 max-w-lg">
-        <h1 class="text-3xl text-blue-500 text-center">Vlowspace</h1>
+      <div class="bg-white shadow-lg p-10 w-full h-100 max-w-lg">
+        <div
+          class="flex justify-center text-blue-500 text-2xl text-center py-5 font-bold"
+        >
+          <img src="~/static/logo.png" alt="" width="200" />
+        </div>
         <div class="flex flex-1 flex-col mb-3">
           <label class="font-bold" for="email">E-mail</label>
           <input
