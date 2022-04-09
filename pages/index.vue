@@ -1,24 +1,55 @@
 <template>
-  <main class="w-full m-5">
-    <div class="flex flex-row mt-1">
-      <div class="p-4 m-3 ml-4 mb-0 mt-2 font-bold tracking-wide text-3xl">
-        <h1>Exames</h1>
-      </div>
+  <form method="post" @submit.prevent="login">
+    <div class="flex flex-1 flex-col">
+      <label class="font-bold" for="email">E-mail</label>
+      <input
+        id="email"
+        v-model="email"
+        type="string"
+        name="email"
+        class="bg-input p-2 rounded-lg"
+      />
     </div>
-    <div class="flex flex-row max-w-screen-2xl">
-      <div class="p-4 m-3 mt-0 bg-card shadow-2xl rounded-lg w-full h-96">
-        <div class="border-b">
-          <div
-            class="justify-around flex flex-row mt-4 ml-20 p-3 border-bord font-bold text-xs"
-          >
-            <div>TIPO</div>
-            <div>STATUS</div>
-            <div>DATA DO EXAME</div>
-            <div>DATA LIMITE PARA AGENDAR</div>
-            <div>OPÇÕES</div>
-          </div>
-        </div>
-      </div>
+    <div class="flex flex-1 flex-col">
+      <label class="font-bold" for="email">Senha</label>
+      <input
+        id="email"
+        v-model="password"
+        type="password"
+        name="email"
+        class="bg-input p-2 rounded-lg"
+      />
     </div>
-  </main>
+
+    <div class="control">
+      <button type="submit" class="button is-dark is-fullwidth">Log In</button>
+    </div>
+  </form>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    async login() {
+      try {
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+
+        this.$router.push('/workspace')
+      } catch (e) {
+        this.error = e.response.data.message
+      }
+    },
+  },
+}
+</script>

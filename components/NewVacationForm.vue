@@ -1,29 +1,26 @@
 <template>
   <div class="flex flex-col">
     <div class="grid grid-cols-2 gap-8">
-      <div class="w-1/2">
-        <div class="flex flex-1 flex-col">
-          <label class="font-bold" for="date_ending">Data de Início</label>
-          <input
-            id="date_ending"
-            v-model="dateStart"
-            type="date"
-            name="date_ending"
-            class="bg-input p-2 rounded-lg"
-          />
-        </div>
+      <div class="flex flex-1 flex-col">
+        <label class="font-bold" for="date_ending">Data de Início</label>
+        <input
+          id="date_ending"
+          v-model="dateStart"
+          type="date"
+          name="date_ending"
+          class="bg-input p-2 rounded-lg"
+        />
       </div>
-      <div class="w-1/2">
-        <div class="flex flex-1 flex-col">
-          <label class="font-bold" for="date_end">Data de Término</label>
-          <input
-            id="date_end"
-            v-model="dateEnd"
-            type="date"
-            name="date_end"
-            class="bg-input p-2 rounded-lg"
-          />
-        </div>
+
+      <div class="flex flex-1 flex-col">
+        <label class="font-bold" for="date_end">Data de Término</label>
+        <input
+          id="date_end"
+          v-model="dateEnd"
+          type="date"
+          name="date_end"
+          class="bg-input p-2 rounded-lg"
+        />
       </div>
     </div>
 
@@ -45,6 +42,7 @@ export default {
     return {
       dateStart: null,
       dateEnd: null,
+      status: 'Pendente',
     }
   },
   computed: {

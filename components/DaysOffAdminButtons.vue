@@ -119,10 +119,10 @@ export default {
       return this.$nuxt.$route.path === '/workspace_admin/work_vacation'
     },
     getQuantity(vacation) {
-      return this.intervalToDuration(
-        new Date(vacation.dateStart),
-        new Date(vacation.dateEnd)
-      ).days
+      return this.intervalToDuration({
+        start: new Date(vacation.dateStart),
+        end: new Date(vacation.dateEnd),
+      }).days
     },
     toggleIsNewValidationOpen() {
       this.isNewValidationOpen = !this.isNewValidationOpen
