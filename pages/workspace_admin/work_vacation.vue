@@ -27,5 +27,8 @@
 <script>
 export default {
   layout: 'workspace',
+  mounted() {
+    this.$store.dispatch('vacations/fetchVacations')
+  },
 }
 </script>
