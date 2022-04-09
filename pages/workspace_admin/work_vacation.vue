@@ -27,5 +27,10 @@
 <script>
 export default {
   layout: 'workspace',
+  computed: {
+    vacations() {
+      return this.$store.state.vacations.list
+    },
+  },
 }
 </script>

@@ -22,11 +22,22 @@
 </template>
 
 <script>
+// import { mapMutations } from 'vuex'
+
 export default {
-  methods: {
-    log() {
-      console.log('test')
+  computed: {
+    vacations() {
+      return this.$store.state.vacations.list
     },
+  },
+  methods: {
+    addTodo(e) {
+      this.$store.commit('vacations/add', e.target.value)
+      e.target.value = ''
+    },
+    // ...mapMutations({
+    //   toggle: 'todos/toggle',
+    // }),
   },
 }
 </script>

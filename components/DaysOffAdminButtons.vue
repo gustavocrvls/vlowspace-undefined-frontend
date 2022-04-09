@@ -1,13 +1,14 @@
 <template>
   <div class="flex flex-col mt-4 ml-14 pb-3">
     <div
-      v-for="stats in status"
-      :key="stats"
+      v-for="vacation in vacations"
+      :key="vacation.id"
       class="flex flex-row mb-3 text-gray-400"
     >
-      <p class="w-1/3 mr-5">{{ firstDate }}</p>
-      <p class="w-1/2 mr-2 ml-1">{{ lastDate }}</p>
-      <p class="w-1/3 ml-2">{{ quantity }}</p>
+      <p class="w-1/3 mr-5">{{ vacation.dateStart }}</p>
+      <p class="w-1/2 mr-2 ml-1">{{ vacation.dateEnd }}</p>
+      <p class="w-1/3 ml-2">{{ status.quantity }}</p>
+      <Badge content="name" />
       <button
         :class="[
           'text-center',
@@ -63,18 +64,12 @@ export default {
       status: ['A Validar', 'Aprovado', 'Rejeitado', 'Vencido'],
     }
   },
-  methods: {
-    background(stats) {
-      if (stats === 'A Validar') {
-        return 'bg-blue-500'
-      } else if (stats === 'Aprovado') {
-        return 'bg-aproved'
-      } else if (stats === 'Rejeitado') {
-        return 'bg-reproved'
-      } else {
-        return 'bg-pending'
-      }
+  computed: {
+    vacations() {
+      return this.$store.state.vacations.list
     },
+  },
+  methods: {
     canEdit() {
       return this.$nuxt.$route.path === '/workspace_admin/work_vacation'
     },
