@@ -1,5 +1,5 @@
 <template>
-  <main class="w-full m-5">
+  <main class="w-full">
     <div class="flex flex-row mt-1">
       <WorkspaceTitle
         class="m-3"

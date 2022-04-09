@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen w-100 relative bg-backg">
-    <Header class="sticky top-0" />
-
-    <div class="max-w-screen-xl mx-auto px-5">
-      <div class="flex">
-        <WorkspaceSidebar class="w-2/12 mt-5" />
-        <div class="w-10/12 ml-5">
-          <Nuxt />
+    <div class="flex">
+      <Sidebar />
+      <div class="w-full max-w-6xl mx-auto">
+        <div class="flex">
+          <div class="w-full">
+            <Nuxt />
+          </div>
         </div>
       </div>
     </div>
