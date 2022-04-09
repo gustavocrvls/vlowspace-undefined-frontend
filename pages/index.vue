@@ -55,7 +55,9 @@ export default {
           },
         })
 
-        this.$router.push('/workspace/work_vacation')
+        if (this.$auth.user.role === 'EMPLOYEE')
+          this.$router.push('/workspace/work_vacation')
+        else this.$router.push('/workspace_admin/work_vacation')
       } catch (e) {
         this.error = e.response.data.message
       }
