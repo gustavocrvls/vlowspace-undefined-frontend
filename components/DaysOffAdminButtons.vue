@@ -55,7 +55,7 @@
             <p>Dias solicitados:</p>
             <p>Quem aprovou:</p>
           </div>
-          <div class="flex flex-col mt-2 justify-around h-28">
+          <div class="flex flex-col mt-2 justify-around h-28 mb-5">
             <p>{{ vacations[selectedIndex].user.name }}</p>
             <p>
               {{
@@ -77,18 +77,51 @@
           </div>
         </div>
         <div
+          v-if="!isJustificationOpen"
           class="flex flex-row mt-4 shadow-inner z-10 justify-end p-3 bg-gray-50"
         >
           <button
-            class="bg-redModal shadow-md hover:bg-red-500 font-bold py-2 px-4 rounded text-white"
+            class="bg-redModal shadow-lg hover:shadow-md transition-shadow hover:bg-red-500 font-bold py-2 px-4 rounded text-white"
+            @click="openJustification()"
           >
             Reprovar
           </button>
           <button
-            class="bg-greenModal shadow-md mr-5 ml-5 hover:bg-green-400 font-bold py-2 px-4 rounded text-white"
+            class="bg-greenModal shadow-lg hover:shadow-md transition-shadow mr-5 ml-5 hover:bg-greenModalHover font-bold py-2 px-4 rounded text-white"
           >
             Aprovar
           </button>
+        </div>
+        <div v-if="isJustificationOpen">
+          <h1 class="font-bold p-5 border-b mr-2 pb-2 text-center border-t">
+            Insira a justificativa:
+          </h1>
+          <div class="flex flex-col mr-2">
+            <textarea
+              class="w-full p-2 shadow-inner border-gray-200 border-2 outline-none"
+            ></textarea>
+            <div class="flex flex-row justify-between">
+              <button
+                class="mt-2 text-blue-500 font-bold py-2 rounded"
+                @click="openJustification()"
+              >
+                <div
+                  class="flex flex-row border-2 border-blue-200 w-24 justify-around p-2 rounded"
+                >
+                  <fa class="pt-1" :icon="['fas', 'arrow-left-long']" />
+                  <p>Voltar</p>
+                </div>
+              </button>
+              <button class="mt-2 text-white font-bold py-2 rounded">
+                <div
+                  class="flex flex-row bg-blue-500 border-2 border-blue-500 w-32 justify-around p-2 rounded"
+                >
+                  <fa class="pt-1" :icon="['fas', 'floppy-disk']" />
+                  <p>Confirmar</p>
+                </div>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </Modal>
@@ -102,6 +135,7 @@ export default {
   data() {
     return {
       isNewValidationOpen: false,
+      isJustificationOpen: false,
       format,
       selectedIndex: 0,
     }
@@ -121,6 +155,9 @@ export default {
     openValidation(index) {
       this.selectedIndex = index
       this.toggleIsNewValidationOpen()
+    },
+    openJustification() {
+      this.isJustificationOpen = !this.isJustificationOpen
     },
   },
 }
