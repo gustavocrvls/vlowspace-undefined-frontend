@@ -13,11 +13,11 @@
       </p>
       <p class="w-1/3 ml-2">{{ `${getQuantity(vacation)} dias` }}</p>
 
-      <Badge :content="vacation.status" />
+      <Badge class="w-72 mr-8 ml-32" :content="vacation.status" />
 
-      <div v-if="vacation.status === 'A Validar'">
+      <div v-if="vacation.status === 'Pendente'">
         <button
-          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
           @click="openValidation(index)"
         >
           <fa :icon="['fas', 'check']" />
@@ -29,17 +29,19 @@
         "
       >
         <button
-          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
+          class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-8"
+          @click="openEdition(index)"
         >
           <fa :icon="['fas', 'pen-to-square']" />
         </button>
       </div>
       <div v-else>
         <button
-          class="h-8 bg-backg w-8 mr-12 shadow-inner cursor-not-allowed"
+          class="h-8 bg-backg w-8 mr-8 shadow-inner cursor-not-allowed"
         ></button>
       </div>
     </div>
+    <!-- Validation Modal -->
     <Modal
       v-if="isNewValidationOpen"
       title="Informações da Solicitação"
@@ -62,15 +64,15 @@
             <p>
               {{
                 `${format(
-                  vacations[selectedIndex].dateStart,
+                  new Date(vacations[selectedIndex].dateStart),
                   'dd/MM/yyyy'
                 )} até ${format(
-                  vacations[selectedIndex].dateEnd,
+                  new Date(vacations[selectedIndex].dateEnd),
                   'dd/MM/yyyy'
                 )}`
               }}
             </p>
-            <p>{{ `${vacations[selectedIndex].quantity} dias` }}</p>
+            <p>{{ `${getQuantity(vacations[selectedIndex])} dias` }}</p>
             <p>
               {{
                 `${vacations[selectedIndex].owner.name} (Gestor), ${vacations[selectedIndex].dp.name} (RH)`
@@ -127,6 +129,70 @@
         </div>
       </div>
     </Modal>
+    <!-- Edition Modal -->
+    <Modal
+      v-if="isEditionOpen"
+      title="Informações da Solicitação | EDIÇÃO"
+      :close="toggleIsEditionOpen"
+      class="border-b"
+    >
+      <div class="border-b" />
+      <div class="flex flex-col">
+        <div class="flex flex-row justify-between pr-20 border-b">
+          <div
+            class="flex flex-col mt-2 justify-around h-28 font-bold text-gray-500"
+          >
+            <p>Colaborador:</p>
+            <p>Período solicitado:</p>
+            <p>Dias solicitados:</p>
+            <p>Quem aprovou:</p>
+          </div>
+          <div class="flex flex-col mt-2 justify-around h-28 mb-5">
+            <p>{{ vacations[selectedIndex].user.name }}</p>
+            <p>
+              {{
+                `${format(
+                  new Date(vacations[selectedIndex].dateStart),
+                  'dd/MM/yyyy'
+                )} até ${format(
+                  new Date(vacations[selectedIndex].dateEnd),
+                  'dd/MM/yyyy'
+                )}`
+              }}
+            </p>
+            <p>{{ `${getQuantity(vacations[selectedIndex])} dias` }}</p>
+            <p>
+              {{
+                `${vacations[selectedIndex].owner.name} (Gestor), ${vacations[selectedIndex].dp.name} (RH)`
+              }}
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-row justify-between mr-3 mt-2">
+          <div class="flex flex-col">
+            <div class="flex flex-row mt-2">
+              <button
+                class="border-2 border-blue-200 justify-around rounded w-5 h-10 mr-2"
+              >
+                <fa class="pt-1 text-blue-500" :icon="['fas', 'arrow-down']" />
+              </button>
+              <Badge
+                class="p-3 h-10 w-36"
+                :content="vacations[selectedIndex].status"
+              />
+            </div>
+          </div>
+          <button class="text-white font-bold py-2 rounded">
+            <div
+              class="flex flex-row shadow-lg hover:shadow-md hover:bg-blue-600 hover:border-blue-600 transition-shadow bg-blue-500 border-2 border-blue-500 w-24 justify-around p-2 rounded"
+            >
+              <fa class="pt-1" :icon="['fas', 'floppy-disk']" />
+              <p>Salvar</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -138,6 +204,7 @@ export default {
     return {
       isNewValidationOpen: false,
       isJustificationOpen: false,
+      isEditionOpen: false,
       format,
       intervalToDuration,
       selectedIndex: 0,
@@ -149,9 +216,6 @@ export default {
     },
   },
   methods: {
-    canEdit() {
-      return this.$nuxt.$route.path === '/workspace_admin/work_vacation'
-    },
     getQuantity(vacation) {
       return this.intervalToDuration({
         start: new Date(vacation.dateStart),
@@ -161,9 +225,16 @@ export default {
     toggleIsNewValidationOpen() {
       this.isNewValidationOpen = !this.isNewValidationOpen
     },
+    toggleIsEditionOpen() {
+      this.isEditionOpen = !this.isEditionOpen
+    },
     openValidation(index) {
       this.selectedIndex = index
       this.toggleIsNewValidationOpen()
+    },
+    openEdition(index) {
+      this.selectedIndex = index
+      this.toggleIsEditionOpen()
     },
     openJustification() {
       this.isJustificationOpen = !this.isJustificationOpen
