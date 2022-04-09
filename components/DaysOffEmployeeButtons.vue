@@ -1,42 +1,33 @@
 <template>
   <div class="flex flex-col mt-4 ml-14 pb-3">
     <div
-      v-for="stats in status"
-      :key="stats"
-      class="flex flex-row mb-3 text-gray-400"
+      v-for="vacation in vacations"
+      :key="vacation.id"
+      class="flex flex-row mb-3 text-gray-600"
     >
-      <p class="w-1/3 mr-5">{{ firstDate }}</p>
-      <p class="w-1/2 mr-9 ml-1">{{ lastDate }}</p>
-      <p class="w-1/3">{{ quantity }}</p>
-      <button
-        :class="[
-          'text-center',
-          'w-72',
-          'text-xs',
-          'text-white',
-          'rounded',
-          'font-bold',
-          'mr-16',
-          'ml-24',
-          'h-8',
-          background(stats),
-        ]"
-      >
-        {{ stats }}
-      </button>
+      <p class="w-1/3 mr-5">{{ format(vacation.dateStart, 'dd/MM/yyyy') }}</p>
+      <p class="w-1/2 mr-2 ml-1">
+        {{ format(vacation.dateEnd, 'dd/MM/yyyy') }}
+      </p>
+      <p class="w-1/3 ml-2">{{ `${vacation.quantity} dias` }}</p>
+      <Badge :content="vacation.status" />
     </div>
   </div>
 </template>
 
 <script>
+import { format } from 'date-fns'
+
 export default {
   data() {
     return {
-      firstDate: 'DD/MM/AA',
-      lastDate: 'DD/MM/AA',
-      quantity: 'XX dias',
-      status: ['Aprovado', 'Rejeitado', 'Em Análise'],
+      format,
     }
+  },
+  computed: {
+    vacations() {
+      return this.$store.state.vacations.list
+    },
   },
   methods: {
     background(stats) {

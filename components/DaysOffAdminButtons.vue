@@ -1,31 +1,19 @@
 <template>
   <div class="flex flex-col mt-4 ml-14 pb-3">
     <div
-      v-for="stats in status"
-      :key="stats"
+      v-for="vacation in vacations"
+      :key="vacation.id"
       class="flex flex-row mb-3 text-gray-400"
     >
-      <p class="w-1/3 mr-5">{{ firstDate }}</p>
-      <p class="w-1/2 mr-2 ml-1">{{ lastDate }}</p>
-      <p class="w-1/3 ml-2">{{ quantity }}</p>
-      <button
-        :class="[
-          'text-center',
-          'w-72',
-          'text-xs',
-          'text-white',
-          'rounded',
-          'font-bold',
-          'mr-16',
-          'ml-24',
-          'h-8',
-          'cursor-default',
-          background(stats),
-        ]"
-      >
-        {{ stats }}
-      </button>
-      <div v-if="stats === 'A Validar'">
+      <p class="w-1/3 mr-5">{{ format(vacation.dateStart, 'dd/MM/yyyy') }}</p>
+      <p class="w-1/2 mr-2 ml-1">
+        {{ format(vacation.dateEnd, 'dd/MM/yyyy') }}
+      </p>
+      <p class="w-1/3 ml-2">{{ `${vacation.quantity} dias` }}</p>
+
+      <Badge :content="vacation.status" />
+
+      <div v-if="vacation.status === 'A Validar'">
         <button
           class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
           @click="toggleIsNewValidationOpen"
@@ -33,7 +21,11 @@
           <fa :icon="['fas', 'check']" />
         </button>
       </div>
-      <div v-else-if="stats === 'Aprovado' || stats === 'Rejeitado'">
+      <div
+        v-else-if="
+          vacation.status === 'Aprovado' || vacation.status === 'Rejeitado'
+        "
+      >
         <button
           class="h-8 shadow-md text-blue-500 border-2 border-blue-500 w-8 mr-12"
         >
@@ -53,28 +45,20 @@
 </template>
 
 <script>
+import { format } from 'date-fns'
+
 export default {
   data() {
     return {
-      isNewValidationOpen: false,
-      firstDate: 'DD/MM/AA',
-      lastDate: 'DD/MM/AA',
-      quantity: 'XX dias',
-      status: ['A Validar', 'Aprovado', 'Rejeitado', 'Vencido'],
+      format,
     }
   },
-  methods: {
-    background(stats) {
-      if (stats === 'A Validar') {
-        return 'bg-blue-500'
-      } else if (stats === 'Aprovado') {
-        return 'bg-aproved'
-      } else if (stats === 'Rejeitado') {
-        return 'bg-reproved'
-      } else {
-        return 'bg-pending'
-      }
+  computed: {
+    vacations() {
+      return this.$store.state.vacations.list
     },
+  },
+  methods: {
     canEdit() {
       return this.$nuxt.$route.path === '/workspace_admin/work_vacation'
     },
