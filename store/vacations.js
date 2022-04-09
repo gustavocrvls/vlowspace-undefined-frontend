@@ -6,6 +6,12 @@ export const state = () => ({
       quantity: 15,
       status: 'Aprovado',
     },
+    {
+      dateStart: new Date(),
+      dateEnd: new Date(),
+      quantity: 15,
+      status: 'Reprovado',
+    },
   ],
 })
 
