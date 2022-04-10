@@ -43,7 +43,7 @@ export default {
       if (stats === 'Aprovado') {
         return 'bg-aproved'
       } else if (stats === 'Rejeitado') {
-        return 'bg-reproved'
+        return 'bg-rejected'
       } else {
         return 'bg-pending'
       }

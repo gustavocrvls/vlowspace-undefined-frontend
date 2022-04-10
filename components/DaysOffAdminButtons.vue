@@ -13,7 +13,16 @@
       </p>
       <p class="w-3/12">{{ `${getQuantity(vacation)} dias` }}</p>
       <p class="w-3/12 text-center">
-        <Badge class="w-48" :content="vacation.status" />
+        <Badge
+          class="w-48"
+          :content="
+            vacation.status !== 'Rejeitado' &&
+            loggedInUser().role === 'MANAGER' &&
+            vacation.ownerApproval
+              ? 'Aprovado'
+              : vacation.status
+          "
+        />
       </p>
 
       <div class="w-2/12">
@@ -76,16 +85,29 @@
               }}
             </p>
             <p>{{ `${getQuantity(vacations[selectedIndex])} dias` }}</p>
-            <p>
+
+            <p
+              v-if="
+                !vacations[selectedIndex].owner && !vacations[selectedIndex].dp
+              "
+            >
+              (Sem aprovações)
+            </p>
+            <p v-else>
               {{
-                `${vacations[selectedIndex].owner.name} (Gestor), ${vacations[selectedIndex].dp.name} (RH)`
+                vacations[selectedIndex].owner &&
+                ` ${vacations[selectedIndex].owner.name} (Gestor)`
+              }}
+              {{
+                vacations[selectedIndex].dp &&
+                ` ${vacations[selectedIndex].dp.name} (RH)`
               }}
             </p>
           </div>
         </div>
         <div
           v-if="!isJustificationOpen"
-          class="flex flex-row mt-4 shadow-inner z-10 justify-end p-3 bg-gray-50"
+          class="flex flex-row mt-4 z-10 justify-end p-3"
         >
           <button
             class="bg-redModal shadow-lg hover:shadow-md transition-shadow hover:bg-red-500 font-bold py-2 px-4 rounded text-white"
@@ -95,6 +117,7 @@
           </button>
           <button
             class="bg-greenModal shadow-lg hover:shadow-md transition-shadow mr-5 ml-5 hover:bg-greenModalHover font-bold py-2 px-4 rounded text-white"
+            @click="approve(vacations[selectedIndex])"
           >
             Aprovar
           </button>
@@ -106,7 +129,8 @@
           <div class="flex flex-col mr-2">
             <textarea
               class="w-full p-2 shadow-inner border-gray-200 border-2 outline-none"
-            ></textarea>
+              v-bind="reason"
+            />
             <div class="flex flex-row justify-between">
               <button
                 class="mt-2 text-blue-500 font-bold py-2 rounded"
@@ -119,7 +143,10 @@
                   <p>Voltar</p>
                 </div>
               </button>
-              <button class="mt-2 text-white font-bold py-2 rounded">
+              <button
+                class="mt-2 text-white font-bold py-2 rounded"
+                @click="reject(vacations[selectedIndex])"
+              >
                 <div
                   class="flex flex-row bg-blue-500 border-2 border-blue-500 w-32 justify-around p-2 rounded"
                 >
@@ -164,9 +191,21 @@
               }}
             </p>
             <p>{{ `${getQuantity(vacations[selectedIndex])} dias` }}</p>
-            <p>
+            <p
+              v-if="
+                !vacations[selectedIndex].owner && !vacations[selectedIndex].dp
+              "
+            >
+              (Sem aprovações)
+            </p>
+            <p v-else>
               {{
-                `${vacations[selectedIndex].owner.name} (Gestor), ${vacations[selectedIndex].dp.name} (RH)`
+                vacations[selectedIndex].owner &&
+                ` ${vacations[selectedIndex].owner.name} (Gestor)`
+              }}
+              {{
+                vacations[selectedIndex].dp &&
+                ` ${vacations[selectedIndex].dp.name} (RH)`
               }}
             </p>
           </div>
@@ -174,11 +213,6 @@
         <div class="flex flex-row justify-between mr-3 mt-2">
           <div class="flex flex-col">
             <div class="flex flex-row mt-2">
-              <button
-                class="border-2 border-blue-200 justify-around rounded w-5 h-10 mr-2"
-              >
-                <fa class="pt-1 text-blue-500" :icon="['fas', 'arrow-down']" />
-              </button>
               <Badge
                 class="p-3 h-10 w-36"
                 :content="vacations[selectedIndex].status"
@@ -201,6 +235,7 @@
 
 <script>
 import { format, intervalToDuration } from 'date-fns'
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -211,11 +246,14 @@ export default {
       format,
       intervalToDuration,
       selectedIndex: 0,
+      reason: '',
     }
   },
   computed: {
     vacations() {
-      return this.$store.state.vacations.list
+      return this.loggedInUser().role === 'DP'
+        ? this.getVacationsToDP()
+        : this.getVacations()
     },
   },
   methods: {
@@ -242,6 +280,23 @@ export default {
     openJustification() {
       this.isJustificationOpen = !this.isJustificationOpen
     },
+    approve(vacation) {
+      this.$store.dispatch('vacations/approveVacation', {
+        vacation,
+        status: 'Aprovado',
+      })
+      this.toggleIsNewValidationOpen()
+    },
+    reject(vacation) {
+      this.$store.dispatch('vacations/rejectVacation', {
+        vacation,
+        status: 'Rejeitado',
+        reason: this.reason,
+      })
+      this.toggleIsNewValidationOpen()
+    },
+    ...mapGetters('vacations', ['getVacations', 'getVacationsToDP']),
+    ...mapGetters(['loggedInUser']),
   },
 }
 </script>

@@ -8,7 +8,6 @@
       'font-bold',
       'h-8',
       'cursor-default',
-      customStyles,
       background(content),
     ]"
   >

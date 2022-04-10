@@ -15,7 +15,7 @@ module.exports = {
         aproved: '#7BE392',
         greenModal: '#6AD95F',
         greenModalHover: '#60DB7B',
-        reproved: '#E37B7B',
+        rejected: '#E37B7B',
         redModal: '#DE0937',
         pending: '#A6A6A6',
         input: '#F2F2F2',
